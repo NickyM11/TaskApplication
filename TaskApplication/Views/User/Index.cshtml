@@ -1,0 +1,30 @@
+﻿@model IEnumerable<TaskApplication.Models.User>
+@{
+    ViewBag.Title = "Gebruiker - Index";
+}
+
+<body>
+    <h2>Gebruikers</h2>
+
+    <table class="table">
+        <tr>
+            <th>Naam</th>
+            <th></th>
+        </tr>
+        @foreach (var user in Model)
+        {
+            <tr>
+                <td>@user.name</td>
+                <td>@Html.ActionLink("Wijzigen", "Edit", new { id = @user.UserId }) |
+                    @Html.ActionLink("Verwijderen", "Delete", new { id = @user.UserId }) |
+                    @Html.ActionLink("Taak toegeven", "AddTaskToUser", "UserTask", new { id = @user.UserId }, null)</td>
+            </tr>
+        }
+    </table>
+    
+    <div class="form-group">
+        @Html.ActionLink("Voeg een nieuwe gebruiker toe", "Add", null, new { @class = "btn btn-default" })
+    </div>
+    
+</body>
+

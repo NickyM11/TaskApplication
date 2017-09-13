@@ -1,0 +1,28 @@
+﻿@model TaskApplication.Models.Task
+@{
+    ViewBag.Title = "Taak wijzigen";
+}
+
+@using (Html.BeginForm("Edit", "Task", FormMethod.Post, new { @class = "form-horizontal" }))
+{
+    <h2>Taak wijzigen</h2>
+    <div class="form-group">
+        @Html.LabelFor(t => t.Description, new { @class = "col-md-2 control-label" })
+
+        <div class="col-md-10">
+            @Html.TextAreaFor(t => t.Description, new { @class = "form-control" })
+            @Html.ValidationMessageFor(t => t.Description)
+        </div>
+    </div>
+
+    <input type="hidden" value="@Model.TaskId" name="TaskId" />
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" class="btn btn-default" value="Wijzigen" />
+        </div>
+    </div>
+}
+
+
+

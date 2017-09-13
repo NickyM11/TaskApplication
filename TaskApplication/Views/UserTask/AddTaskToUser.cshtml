@@ -1,0 +1,49 @@
+﻿@model TaskApplication.ViewModels.AddTaskToUserViewModel
+@{
+    ViewBag.Title = "AddTaskToUser";
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#@Html.IdFor(x => x.Deadline)").datepicker({ dateFormat: 'dd/mm/yy' });
+        });
+    </script>
+}
+
+@using (Html.BeginForm("AddTaskToUser", "UserTask", FormMethod.Post, new { @class = "form-horizontal" }))
+{
+    <h2>Geef een taak aan @Model.User.name</h2>
+    @Html.Hidden("Userid", @Model.User.UserId)
+
+    <div class="form-group">
+        @Html.LabelFor(x => x.User.name, new { @class ="col-md-2 control-label"})
+        
+        <div class="col-md-2">
+            <select name="taskId" class="form-control" style="width: 200px">
+                @foreach (var task in Model.Tasks)
+                {
+                    <option value="@task.TaskId">
+                        @task.Description
+                    </option>
+                }
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(x => x.Deadline, new { @class="col-md-2 control-label"})
+
+        <div class="col-md-10">
+            @Html.TextBoxFor(x => x.Deadline, new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => x.Deadline)
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" class="btn btn-default" value="Taak toewijzen" />
+        </div>
+    </div>
+    
+}
+
+
