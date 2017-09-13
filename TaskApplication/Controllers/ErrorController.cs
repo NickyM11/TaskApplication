@@ -6,11 +6,9 @@ namespace TaskApplication.Controllers
     public class ErrorController : Controller
     {
         // GET: Error
-        public ActionResult Display()
+        public ActionResult Display(string errorMessage)
         {
-            Exception e =  (Exception) TempData["error"];
-
-            ViewBag.Error = e.Message;
+            ViewBag.Error = errorMessage;
             return View();
         }
     }

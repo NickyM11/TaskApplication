@@ -204,6 +204,7 @@
     <Compile Include="Models\UserTask.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\IService.cs" />
+    <Compile Include="Services\IUserTaskService.cs" />
     <Compile Include="Services\UserTaskService.cs" />
     <Compile Include="ViewModels\AddTaskToUserViewModel.cs" />
   </ItemGroup>
