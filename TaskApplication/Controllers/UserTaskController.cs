@@ -47,41 +47,7 @@ namespace TaskApplication.Controllers
 
                 return RedirectToAction("Index", "Home");
             }
-
             return View(addTaskToUserViewModel);
-
-            //using (var db = new TaskDbContext())
-            //{
-            //    Task TaskFromDb = db.Tasks.Find(taskId);
-            //    User UserFromDb = db.Users.Find(UserId);
-
-            //    if (TaskFromDb == null || UserFromDb == null)
-            //    {
-            //        return HttpNotFound();
-            //    }
-
-            //    UserTask UserTask = new UserTask()
-            //    {
-            //        User = User,
-            //        Task = TaskFromDb,
-            //        UserId = User.UserId,
-            //        TaskId = TaskFromDb.TaskId,
-            //        Deadline = addTaskToUserViewModel.Deadline
-            //    };
-
-            //    db.UserTasks.Add(UserTask);
-
-            //    ModelState.AddModelError("adding", "something went wrong");
-
-            //    try
-            //    {
-            //        db.SaveChanges();
-            //    }
-            //    catch (System.Data.Entity.Infrastructure.DbUpdateException e)
-            //    {
-            //        TempData["error"] = e;
-            //        return RedirectToAction("Display", "Error");
-            //    }
         }
     }
 }

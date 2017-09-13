@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using TaskApplication.DataAccessLayer;
 using TaskApplication.Models;
+using System.Linq;
+using TaskApplication.ViewModels;
 
 namespace TaskApplication.Services
 {
@@ -42,6 +45,21 @@ namespace TaskApplication.Services
                     errorMessage = "Deze gebruiker heeft deze taak al op zijn naam staan";
                     return false;
                 }
+            }
+        }
+
+        public List<User> GetTasksPerUser()
+        {
+            using (var db = new TaskDbContext())
+            {
+                List<User> users = db.Users.ToList();
+
+                foreach(User user in users)
+                {
+                    List<Task> tasks = db.UserTasks.Where(e => e.UserId == user.UserId).Select(e => e.Task).ToList();
+                    user.Tasks = tasks;
+                }
+                return users;
             }
         }
     }

@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Collections.Generic;
 using System.Web.Mvc;
+using TaskApplication.Models;
+using TaskApplication.Services;
 
 namespace TaskApplication.Controllers
 {
@@ -11,7 +10,10 @@ namespace TaskApplication.Controllers
         // GET: Home
         public ActionResult Index()
         {
-            return View();
+            IUserTaskService _userTaskService= new UserTaskService();
+            var usersWithTasks = _userTaskService.GetTasksPerUser();
+
+            return View(usersWithTasks);
         }
     }
 }

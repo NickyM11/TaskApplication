@@ -1,7 +1,31 @@
-﻿
+﻿@model IEnumerable<TaskApplication.Models.User>
 @{
     ViewBag.Title = "Index";
 }
 
-<h2>Welkom op de homepage</h2>
+<body>
+    <h2>Welkom op de homepage</h2>
+
+    <table class="table">
+        <tr>
+            <th>Naam</th>
+            <th>Taken</th>
+        </tr>
+        @foreach(var user in Model)
+        {
+            <tr>
+                <td>@user.name</td>
+                <td>
+                    <ul>
+                        @foreach(var task in user.Tasks)
+                        {
+                            <li>@task.Description</li>
+                        }
+                    </ul>
+                </td>
+            </tr>
+        }
+    </table>
+</body>
+
 
