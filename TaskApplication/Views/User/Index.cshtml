@@ -17,7 +17,7 @@
                 <td>@user.name</td>
                 <td>@Html.ActionLink("Wijzigen", "Edit", new { id = @user.UserId }) |
                     @Html.ActionLink("Verwijderen", "Delete", new { id = @user.UserId }) |
-                    @Html.ActionLink("Taak toegeven", "AddTaskToUser", "UserTask", new { id = @user.UserId }, null)</td>
+                    @Html.ActionLink("Taak toewijzen", "AddTaskToUser", "UserTask", new { id = @user.UserId }, null)</td>
             </tr>
         }
     </table>

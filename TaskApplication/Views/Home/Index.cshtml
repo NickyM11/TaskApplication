@@ -1,6 +1,10 @@
-﻿@model IEnumerable<TaskApplication.Models.User>
+﻿@model IEnumerable<TaskApplication.ViewModels.HomepageViewModel>
 @{
     ViewBag.Title = "Index";
+}
+
+@section css {
+    <link href=@Url.Content("~/Content/homepage.css") rel="stylesheet" type="text/css" />
 }
 
 <body>
@@ -10,16 +14,25 @@
         <tr>
             <th>Naam</th>
             <th>Taken</th>
+            <th>Deadline</th>
         </tr>
-        @foreach(var user in Model)
+        @foreach(var viewmodel in Model)
         {
             <tr>
-                <td>@user.name</td>
+                <td>@viewmodel.User.name</td>
                 <td>
-                    <ul>
-                        @foreach(var task in user.Tasks)
+                    <ul class="list">
+                        @foreach(var userTask in viewmodel.Tasks)
                         {
-                            <li>@task.Description</li>
+                            <li>@userTask.Task.Description</li>
+                        }
+                    </ul>
+                </td>
+                <td>
+                    <ul class="list">
+                        @foreach (var userTask in viewmodel.Tasks)
+                        {
+                            <li>@userTask.Deadline</li>
                         }
                     </ul>
                 </td>

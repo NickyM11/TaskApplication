@@ -48,23 +48,26 @@ namespace TaskApplication.Services
             }
         }
 
-        public List<User> GetTasksPerUser()
+        public List<HomepageViewModel> GetTasksPerUser()
         {
             using (var db = new TaskDbContext())
             {
-                var users = new List<User>();
+                var usersForView = new List<HomepageViewModel>();
 
                 //Get users who have one or more tasks
                 var userWithTasks = db.UserTasks.Select(ut => ut.UserId).Distinct();
                 foreach (int userId in userWithTasks)
                 {
                     User user = db.Users.Find(userId);
-
-                    //Get tasks assigned to the user
-                    user.Tasks = db.UserTasks.Where(e => e.UserId == user.UserId).Select(e => e.Task).ToList();
-                    users.Add(user);
+                    
+                    HomepageViewModel homepageViewModel = new HomepageViewModel()
+                    {
+                        User = user,
+                        Tasks = db.UserTasks.Include("Task").Where(u => u.UserId == user.UserId).ToList()
+                    };
+                    usersForView.Add(homepageViewModel);
                 }
-                return users;
+                return usersForView;
             }
         }
     }
