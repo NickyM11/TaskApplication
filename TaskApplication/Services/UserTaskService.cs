@@ -52,12 +52,17 @@ namespace TaskApplication.Services
         {
             using (var db = new TaskDbContext())
             {
-                List<User> users = db.Users.ToList();
+                var users = new List<User>();
 
-                foreach(User user in users)
+                //Get users who have one or more tasks
+                var userWithTasks = db.UserTasks.Select(ut => ut.UserId).Distinct();
+                foreach (int userId in userWithTasks)
                 {
-                    List<Task> tasks = db.UserTasks.Where(e => e.UserId == user.UserId).Select(e => e.Task).ToList();
-                    user.Tasks = tasks;
+                    User user = db.Users.Find(userId);
+
+                    //Get tasks assigned to the user
+                    user.Tasks = db.UserTasks.Where(e => e.UserId == user.UserId).Select(e => e.Task).ToList();
+                    users.Add(user);
                 }
                 return users;
             }
